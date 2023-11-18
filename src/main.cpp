@@ -78,7 +78,11 @@ setup(void)
     ledcSetup(ledChannel, freq, resolution);
     ledcAttachPin(LED, ledChannel);
 
-    wifi_connect();
+#if WIFI_MODE == 0
+    wifi_connect_sta();
+#else
+    wifi_connect_ap();
+#endif
 
     server.on("/", []() { server.send_P(200, "text/html", webpage); });
     server.begin();

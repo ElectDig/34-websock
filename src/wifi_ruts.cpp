@@ -11,7 +11,7 @@
 #include "wifi_data.h"
 
 void
-wifi_connect(void)
+wifi_connect_sta(void)
 {
     WiFi.begin(MY_SSID, MY_PASS);
 
@@ -32,4 +32,12 @@ wifi_connect(void)
     Serial.print( "local IP = " );
     Serial.println( WiFi.localIP() );
     Serial.println("______________");
+}
+
+void 
+wifi_connect_ap(void)
+{
+    WiFi.softAP(AP_SSID, AP_PASS);
+    Serial.print( "station IP = " );
+    Serial.println(WiFi.softAPIP() );
 }

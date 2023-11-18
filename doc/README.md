@@ -61,26 +61,29 @@
    (54-59) En ese caso, se convierte el resto del string que se encuentra en el _payload_ a _long_ y dicho valor se utiliza para ajustar el PWM que ataca el LED, aparte de imprimirlo en la interfase serie del ESP32  
    (60-65) En caso contrario, se imprime el _payload_ de longitud _length_ sobre la interfase serie del ESP32  
 
-   (73-87) _setup_  
+   (73-91) _setup_  
    (76) Inicialización de _Serial_  
    (78-79) Inicialización de PWM  
-   (81) Conexión a WiFi  
-   (83) Cargar la página Web  
-   (84) Arrancar el servidor
-   (85) Arrancar los _Web Sockets_  
-   (86) Registrar la _callback function webSocketEvent_  
+   (81-85) Conexión a WiFi  
+   (82) Conexión como Station
+   (84) Conexión como Access Point
+   (87) Cargar la página Web  
+   (88) Arrancar el servidor
+   (89) Arrancar los _Web Sockets_  
+   (90) Registrar la _callback function webSocketEvent_  
 
-   (89-101) _loop_  
-   (92) _array c_ de 1 posición para guardar cada caracter de _Serial_  
-   (94) _webSocket.loop_: Para manejar la recepción del _broadcast_ de _webSocket_ los eventos 1 y 3 listados en _Objetivo_ de este documento, llamando a la función de _callback_ _webSocketEvent_  
-   (95) _server.handleClient_ para manejar los requerimientos normales al server  
-   (96) Determinar si hay un caracter en la interfase serie del ESP32 hacia la PC   
-   (98) si hay, se deposita en la única posición del arreglo _c_  
-   (99) y se realiza un envío por _broactast_ de dicho caracter   
+   (93-105) _loop_  
+   (96) _array c_ de 1 posición para guardar cada caracter de _Serial_  
+   (98) _webSocket.loop_: Para manejar la recepción del _broadcast_ de _webSocket_ los eventos 1 y 3 listados en _Objetivo_ de este documento, llamando a la función de _callback_ _webSocketEvent_  
+   (99) _server.handleClient_ para manejar los requerimientos normales al server  
+   (100) Determinar si hay un caracter en la interfase serie del ESP32 hacia la PC   
+   (102) si hay, se deposita en la única posición del arreglo _c_  
+   (103) y se realiza un envío por _broactast_ de dicho caracter   
 
 ## platformio.ini
 
    Define:  
+   _WIFI_MODE_: 0 -> conectar como Station; 1-> Conectar como Access Point
    _LED_OFF_: Para definir si el valor para apagar el LED es _LOW_ o _HIGH_   
    _LED_: GPIO donde está conectado el LED
    _SERIAL_BAUD_: Baud rate de la conexión serie 
